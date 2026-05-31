@@ -33,7 +33,8 @@ Predict whether a steel coil contains manufacturing defects using process parame
 
 The dataset is highly imbalanced.
 
-![Class Distribution](images/class_distribution.png)
+<img width="560" height="463" alt="class_distribution" src="https://github.com/user-attachments/assets/de8be1f7-2537-4d69-8fde-35431ade5ec0" />
+
 
 ---
 
@@ -41,7 +42,8 @@ The dataset is highly imbalanced.
 
 The complete workflow followed in this project.
 
-![Pipeline](images/model_pipeline.png)
+<img width="1360" height="840" alt="ml_pipeline_horizontal" src="https://github.com/user-attachments/assets/370a35fc-41ba-46ff-9c26-f21b4448d0fc" />
+
 
 ---
 
@@ -88,7 +90,8 @@ After extensive experimentation the following features produced the best result:
 
 Most influential variables selected by the feature model.
 
-![Feature Importance](images/feature_importance.png)
+<img width="831" height="528" alt="feature_importance" src="https://github.com/user-attachments/assets/782dab46-d6fd-4577-9808-f1e43ac7917c" />
+
 
 ---
 
@@ -98,7 +101,7 @@ Most influential variables selected by the feature model.
 
 Defective coils generally show significantly higher X13 values.
 
-![X13 Distribution](images/x13_distribution.png)
+<img width="562" height="455" alt="x13_distribution" src="https://github.com/user-attachments/assets/1f2a0351-4cbc-45c7-9d82-c36dcbe88866" />
 
 ---
 
@@ -106,7 +109,8 @@ Defective coils generally show significantly higher X13 values.
 
 Defective coils generally show much lower X35 values.
 
-![X35 Distribution](images/x35_distribution.png)
+<img width="571" height="455" alt="x35_distribution" src="https://github.com/user-attachments/assets/927615c6-2c5d-4f64-a8f4-2f94d1d2be22" />
+
 
 ---
 
@@ -114,7 +118,8 @@ Defective coils generally show much lower X35 values.
 
 Defective coils generally show lower X36 values.
 
-![X36 Distribution](images/x36_distribution.png)
+<img width="571" height="455" alt="x36_distribution" src="https://github.com/user-attachments/assets/c0fb4345-ec3a-4e33-bfcc-2743f91ab473" />
+
 
 ---
 
@@ -309,9 +314,9 @@ B.Tech Student | Data Science & Machine Learning Enthusiast
 - Predictive Maintenance
 - Railway Technology
 
-GitHub: [https://github.com/YOUR_USERNAME](https://github.com/Kaushalraj27/)
+GitHub: [https://github.com/Kaushalraj27]
 
-LinkedIn: [https://linkedin.com/in/YOUR_LINKEDIN](https://www.linkedin.com/in/kaushal-raj21/)
+LinkedIn: [https://linkedin.com/in/kaushal-raj21]
 
 ---
 
