@@ -28,6 +28,8 @@ The challenge involves:
 ---
 
 # 📊 Dataset Overview
+<img width="560" height="463" alt="class_distribution" src="https://github.com/user-attachments/assets/5f5602e6-93e8-4189-b8dd-27af12af7300" />
+
 
 | Metric | Value |
 |----------|----------|
@@ -50,27 +52,7 @@ The challenge involves:
 
 # 🏭 Machine Learning Pipeline
 
-```text
-Raw Data
-    │
-    ▼
-Missing Value Handling
-    │
-    ▼
-Feature Selection
-    │
-    ▼
-XGBoost Training
-    │
-    ▼
-Probability Prediction
-    │
-    ▼
-Threshold Optimization
-    │
-    ▼
-Final Submission
-```
+<img width="1360" height="840" alt="ml_pipeline_horizontal" src="https://github.com/user-attachments/assets/cb99b32b-c7f8-4647-a105-01230ce4d269" />
 
 ---
 
