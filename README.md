@@ -1,98 +1,71 @@
-# HOT-ROLLING-DEFECT-PREDICTION-CHALLENGE
-Machine Learning solution for steel defect prediction using XGBoost. Includes feature engineering, class imbalance handling, model optimization, and production-ready prediction pipeline. Developed by Kaushal Raj.
-
 # 🔍 Tata Steel Defect Prediction Challenge
 
-> Machine Learning solution for predicting manufacturing defects in steel coils using XGBoost, feature selection, threshold optimization, and imbalanced data handling.
+> Machine Learning solution for predicting steel manufacturing defects using XGBoost, feature selection, threshold optimization and imbalance handling.
 
-**Developed by:** Kaushal Raj
+**Developer:** Kaushal Raj
 
 ![Python](https://img.shields.io/badge/Python-3.x-blue)
 ![XGBoost](https://img.shields.io/badge/XGBoost-ML-orange)
-![Status](https://img.shields.io/badge/Status-Completed-success)
-![Leaderboard](https://img.shields.io/badge/Best%20Score-84.63-green)
+![Score](https://img.shields.io/badge/Best%20Score-84.63-green)
 
 ---
 
 # 📌 Problem Statement
 
-The objective of this project is to predict whether a steel coil is defective or non-defective using manufacturing process parameters collected during production.
-
-The challenge involves:
-
-- Highly imbalanced data
-- Missing values
-- Complex industrial process variables
-- Rare defect occurrences
+Predict whether a steel coil contains manufacturing defects using process parameters collected during production.
 
 ---
 
 # 📊 Dataset Overview
-<img width="560" height="463" alt="class_distribution" src="https://github.com/user-attachments/assets/5f5602e6-93e8-4189-b8dd-27af12af7300" />
-
 
 | Metric | Value |
 |----------|----------|
 | Training Samples | 1352 |
 | Test Samples | 339 |
 | Features | 49 |
-| Target Variable | Y |
 | Defect Samples | 66 |
-| Non-Defect Samples | 1286 |
+| Non Defect Samples | 1286 |
 | Defect Ratio | 4.88% |
 
-### Class Distribution
+---
 
-| Class | Count |
-|---------|---------:|
-| Non Defect (0) | 1286 |
-| Defect (1) | 66 |
+# 📊 Class Distribution
+
+The dataset is highly imbalanced.
+
+![Class Distribution](images/class_distribution.png)
 
 ---
 
 # 🏭 Machine Learning Pipeline
 
-<img width="1360" height="840" alt="ml_pipeline_horizontal" src="https://github.com/user-attachments/assets/cb99b32b-c7f8-4647-a105-01230ce4d269" />
+The complete workflow followed in this project.
+
+![Pipeline](images/model_pipeline.png)
 
 ---
 
 # 🧹 Data Preprocessing
 
-## Missing Values
+### Missing Value Handling
 
-Median Imputation was used for handling missing values.
+Median Imputation was used because:
 
-### Why Median?
-
-- Robust against outliers
-- Suitable for industrial process data
-- Performed better than mean imputation
+- Robust to outliers
+- Performs well on industrial process data
+- Better than mean imputation in experiments
 
 ```python
-from sklearn.impute import SimpleImputer
-
-imputer = SimpleImputer(strategy="median")
+SimpleImputer(strategy="median")
 ```
 
 ---
 
-# 🎯 Feature Selection Strategy
+# 🎯 Feature Selection
 
-An initial XGBoost model was trained on all available features.
+Initial XGBoost feature importance was used.
 
-Feature importance values were extracted and multiple experiments were conducted:
-
-- Top 10 Features
-- Top 11 Features
-- Top 12 Features
-- Top 15 Features
-- Top 20 Features
-- Recursive Feature Elimination
-- Domain-based Feature Engineering
-
----
-
-# ⭐ Final Selected Features
+After extensive experimentation the following features produced the best result:
 
 | Rank | Feature |
 |---------|---------|
@@ -111,65 +84,58 @@ Feature importance values were extracted and multiple experiments were conducted
 
 ---
 
-# 📈 Feature Analysis
+# 📈 Feature Importance
 
-Statistical analysis revealed strong separation between defective and non-defective coils.
+Most influential variables selected by the feature model.
 
-## Important Observations
-
-| Feature | Defect Trend |
-|----------|----------|
-| X13 | Higher in Defect |
-| X32 | Higher in Defect |
-| X35 | Lower in Defect |
-| X36 | Lower in Defect |
-| X39 | Lower in Defect |
+![Feature Importance](images/feature_importance.png)
 
 ---
 
-# 📊 Feature Separation Table
+# 🔬 Feature Analysis
 
-| Feature | Normal Mean | Defect Mean |
-|----------|------------:|------------:|
-| X13 | 846.16 | 1312.33 |
-| X35 | 10.32M | 2.16M |
-| X36 | 2376.82 | 378.88 |
-| X32 | 15.82 | 19.52 |
-| X39 | 162.51 | 157.83 |
+## X13 Distribution
 
-These variables contributed most significantly to defect prediction.
+Defective coils generally show significantly higher X13 values.
+
+![X13 Distribution](images/x13_distribution.png)
+
+---
+
+## X35 Distribution
+
+Defective coils generally show much lower X35 values.
+
+![X35 Distribution](images/x35_distribution.png)
+
+---
+
+## X36 Distribution
+
+Defective coils generally show lower X36 values.
+
+![X36 Distribution](images/x36_distribution.png)
 
 ---
 
 # ⚖️ Class Imbalance Handling
 
-The dataset is highly imbalanced.
+The dataset contains only:
 
 ```text
-Non Defect = 1286
-Defect = 66
+66 Defect Samples
+1286 Non Defect Samples
 ```
 
-Class imbalance was handled using:
+Class imbalance handled using:
 
 ```python
 scale_pos_weight = 19
 ```
 
-Additional techniques tested:
-
-- Class Weighting
-- Focal Loss
-- Pseudo Labeling
-- Ensemble Learning
-
-The final XGBoost approach achieved the best results.
-
 ---
 
 # 🤖 Final Model
-
-## XGBoost Classifier
 
 ```python
 XGBClassifier(
@@ -187,50 +153,46 @@ XGBClassifier(
 
 # 🎚 Threshold Optimization
 
-Instead of using default predictions, probability outputs were analyzed.
+Several thresholds were tested.
 
-Multiple thresholds were evaluated.
-
-## Best Threshold
+Best threshold:
 
 ```python
 0.00095
 ```
 
-Prediction Rule:
+Prediction rule:
 
 ```python
 if probability > 0.00095:
-    predict = 1
+    prediction = 1
 else:
-    predict = 0
+    prediction = 0
 ```
 
 ---
 
 # 🧪 Experiments Conducted
 
-| Experiment | Result |
+| Experiment | Status |
 |------------|---------|
 | Feature Importance Selection | ✅ |
 | Threshold Tuning | ✅ |
-| Top-N Features | ✅ |
-| X39 Feature Addition | ✅ |
+| Top Feature Search | ✅ |
+| X39 Feature Inclusion | ✅ |
 | CatBoost | ❌ |
 | Random Forest | ❌ |
 | Extra Trees | ❌ |
 | Ensemble Models | ❌ |
 | Pseudo Labeling | ❌ |
-| Interaction Features | ❌ |
 | RFE | ❌ |
+| Interaction Features | ❌ |
 
 ---
 
-# 🏆 Best Solution
+# 🏆 Best Performing Configuration
 
-## Configuration
-
-### Features
+## Features
 
 ```text
 X13
@@ -247,7 +209,7 @@ X21
 X39
 ```
 
-### Model
+## Model
 
 ```python
 XGBClassifier(
@@ -261,10 +223,16 @@ XGBClassifier(
 )
 ```
 
-### Threshold
+## Threshold
 
 ```python
 0.00095
+```
+
+## Best Leaderboard Score
+
+```text
+84.63
 ```
 
 ---
@@ -279,61 +247,33 @@ TataSteel-Defect-Prediction/
 ├── requirements.txt
 ├── FINAL_84_63.csv
 │
-├── notebooks/
-│   ├── feature_selection.ipynb
-│   ├── threshold_tuning.ipynb
+├── images/
+│   ├── class_distribution.png
+│   ├── feature_importance.png
+│   ├── x13_distribution.png
+│   ├── x35_distribution.png
+│   ├── x36_distribution.png
+│   └── model_pipeline.png
 │
 └── outputs/
-    └── final_submission.csv
 ```
-
----
-
-# 📷 Results
-
-## Best Leaderboard Score
-
-| Metric | Value |
-|----------|---------|
-| Public Score | 84.63 |
-
----
-
-# 🚀 Future Improvements
-
-Potential future work:
-
-- SHAP-based feature selection
-- Automated feature generation
-- Domain-specific steel process features
-- Advanced anomaly detection
-- Hybrid rule-based + ML systems
 
 ---
 
 # 🛠 Technologies Used
 
-| Tool | Purpose |
-|--------|----------|
+| Technology | Purpose |
+|------------|----------|
 | Python | Programming |
 | Pandas | Data Processing |
 | NumPy | Numerical Computation |
-| Scikit-Learn | ML Utilities |
-| XGBoost | Classification Model |
-| Google Colab | Development Environment |
+| Scikit-Learn | Preprocessing |
+| XGBoost | Classification |
+| Google Colab | Development |
 
 ---
 
-# 📦 Installation
-
-```bash
-pip install pandas
-pip install numpy
-pip install scikit-learn
-pip install xgboost
-```
-
-or
+# 🚀 Installation
 
 ```bash
 pip install -r requirements.txt
@@ -364,23 +304,25 @@ B.Tech Student | Data Science & Machine Learning Enthusiast
 ### Areas of Interest
 
 - Machine Learning
+- Data Science
 - Industrial AI
 - Predictive Maintenance
-- Data Science
 - Railway Technology
 
-GitHub: https://github.com/YOUR_USERNAME
+GitHub: [https://github.com/YOUR_USERNAME](https://github.com/Kaushalraj27/)
 
-LinkedIn: https://linkedin.com/in/YOUR_PROFILE
+LinkedIn: [https://linkedin.com/in/YOUR_LINKEDIN](https://www.linkedin.com/in/kaushal-raj21/)
 
 ---
 
 # ⭐ Acknowledgements
 
-This project was developed as part of the Tata Steel Defect Prediction Challenge and focuses on applying machine learning techniques to industrial manufacturing data for quality prediction and process optimization.
+Developed for the Tata Steel Defect Prediction Challenge.
+
+Focused on industrial process analytics, defect prediction and machine learning based quality assurance.
 
 ---
 
-## 📜 License
+# 📜 License
 
-This repository is intended for educational, research, and competition purposes.
+Educational and Research Use.
